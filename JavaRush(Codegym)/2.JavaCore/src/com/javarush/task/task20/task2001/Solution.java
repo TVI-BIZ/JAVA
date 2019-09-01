@@ -14,15 +14,15 @@ public class Solution {
         //исправьте outputStream/inputStream в соответствии с путем к вашему реальному файлу
         try {
             File your_file_name = File.createTempFile("/Users/vlad3d/JAVA_DEVELOPER/JAVARUSH/files/f1N.txt", null);
+
             OutputStream outputStream = new FileOutputStream("/Users/vlad3d/JAVA_DEVELOPER/JAVARUSH/files/f2.txt");
             InputStream inputStream = new FileInputStream("/Users/vlad3d/JAVA_DEVELOPER/JAVARUSH/files/f2.txt");
 
             Human ivanov = new Human("Ivanov", new Asset("home", 999_999.99), new Asset("car", 2999.99));
-            //Human sidorov = new Human("Sidorov", new Asset("home", 999_999.99), new Asset("car", 2999.99));
 
             ivanov.save(outputStream);
-            //sidorov.save(outputStream);
             outputStream.flush();
+
 
 
 
@@ -30,6 +30,10 @@ public class Solution {
             somePerson.load(inputStream);
             inputStream.close();
             //check here that ivanov equals to somePerson - проверьте тут, что ivanov и somePerson равны
+
+            if (ivanov.equals(somePerson)) System.out.println("Равны");
+            else System.out.println("Не равны");
+
 
         } catch (IOException e) {
             //e.printStackTrace();
@@ -76,64 +80,56 @@ public class Solution {
 
         public void save(OutputStream outputStream) throws Exception {
             //implement this method - реализуйте этот метод
-            String isNamePresented = this.name != null ? "yes": "no";
-            outputStream.write((isNamePresented + " ").getBytes());
-            outputStream.flush();
+            String isNamePresneted = name != null ? "yes": "no";
+            String isAssetsPresented = assets != null ? "yes": "no";
 
-            if( this.name != null){
-                outputStream.write(this.name.getBytes());
-            }
+            PrintWriter writer = new PrintWriter(outputStream);
+            writer.println(isNamePresneted);
 
-            String isAssetsPresented = this.assets != null ? "yes": "no";
-            outputStream.write((" " +isAssetsPresented ).getBytes());
-            outputStream.flush();
+            if(assets == null){
+                writer.println(name);
+                writer.println(isAssetsPresented);
 
-            if(this.assets != null){
-                for(Asset elem:assets){
-                    outputStream.write(" ".getBytes());
-                    outputStream.write(elem.getName().getBytes());
-                    outputStream.write(" ".getBytes());
-                    outputStream.write(String.valueOf((int)elem.getPrice()).getBytes());
+                writer.flush();
+            } else {
+                writer.println(name);
+                writer.println(isAssetsPresented);
+                writer.flush();
+                for(Asset elem: assets){
+                    writer.println(elem.getName());
+                    writer.println(elem.getPrice());
                 }
+                writer.flush();
             }
-            outputStream.flush();
-            outputStream.close();
         }
 
         public void load(InputStream inputStream) throws Exception {
             //implement this method - реализуйте этот метод
-            String bigStr = "";
-           while (inputStream.available()>0){
-               int data = inputStream.read();
-               bigStr += (char) data;
-           }
-           inputStream.close();
-           String[] trimStr = bigStr.split(" ");
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            String isNamePresented = reader.readLine();
 
-           String isNamePresented = trimStr[0];
-           if(isNamePresented.equals("yes")){
-               this.name = trimStr[1];
-           }
+            if(isNamePresented.equals("yes")){
+                name = reader.readLine();
+            }
 
-           String isAssetsPresented = trimStr[2];
-           if(isAssetsPresented.equals("yes"))
-                {
-                    for(int i = 0; i < (trimStr.length-3)/2; i++)
-                        {
-                           int n = (i*2)+3; // 3,5
-                           int k = (i*2)+4; // 4,6
-                           this.assets.add(i,new Asset(trimStr[n],Double.parseDouble(trimStr[k])));
-                        }
+            String isAssetPresented = reader.readLine();
+            if(isAssetPresented.equals("yes")){
+                while (reader.ready()){
+                    String data = reader.readLine();
+                    String data2 = reader.readLine();
+                    assets.add(new Asset(data,Double.parseDouble(data2)));
+                }
+            }
+//            for (Asset elem: assets){
+//                System.out.println(elem.getName());
+//                System.out.println(elem.getPrice());
+//            }
 
-                 }
-            //Test if our assets array is good after loading
-//           for(Asset elem: this.assets){
-//               System.out.println(elem.getName());
-//               System.out.println(elem.getPrice());
-//           }
+
+
+
+
 
         }
-
-
     }
 }
