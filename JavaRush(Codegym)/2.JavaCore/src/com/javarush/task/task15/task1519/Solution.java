@@ -13,31 +13,24 @@ public class Solution {
         //напиште тут ваш код
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-
-
-
         while (true){
             String strVal = reader.readLine();
             if (!strVal.equals("exit")){
-                if((Integer.parseInt(strVal) <= 0) || (Integer.parseInt(strVal) >= 128)){
+                if (strVal.matches(".*[a-zA-Z]+.*")){
+                    print(strVal);
+                } else if(strVal.contains(".")){
                     try {
-                        print(Integer.parseInt(strVal));
+                        print(Double.parseDouble(strVal));
                     } catch (Exception e){
                     }
-                }else if((Short.parseShort(strVal) > 0) && (Short.parseShort(strVal) < 128)){
+                } else if ((strVal.chars().allMatch(Character::isDigit)) && ((Integer.parseInt(strVal) > 0) && (Integer.parseInt(strVal) < 128))) {
                     try {
                         print(Short.parseShort(strVal));
                     } catch (Exception e){
                     }
-                }else if((Integer.parseInt(strVal) <= 0) || (Integer.parseInt(strVal) >= 128)){
+                }else if ((strVal.matches("-?[1-9]\\d*|0")) && ((Integer.parseInt(strVal) <= 0) || (Integer.parseInt(strVal) >= 128))){
                     try {
                         print(Integer.parseInt(strVal));
-                    } catch (Exception e){
-                    }
-                }
-                else {
-                    try {
-                        print(strVal);
                     } catch (Exception e){
                     }
                 }
@@ -45,40 +38,8 @@ public class Solution {
                 break;
             }
         }
-
-//        while (true){
-//            String strVal = reader.readLine();
-//            if (!strVal.equals("exit")){
-//                if(strVal.contains(".")){
-//                    try {
-//                        print(Double.parseDouble(strVal));
-//                    } catch (Exception e){
-//                    }
-//                }else if((Short.parseShort(strVal) > 0) && (Short.parseShort(strVal) < 128)){
-//                    try {
-//                        print(Short.parseShort(strVal));
-//                    } catch (Exception e){
-//                    }
-//                }else if((Integer.parseInt(strVal) <= 0) || (Integer.parseInt(strVal) >= 128)){
-//                    try {
-//                        print(Integer.parseInt(strVal));
-//                    } catch (Exception e){
-//                    }
-//                }
-//                else {
-//                    try {
-//                        print(strVal);
-//                    } catch (Exception e){
-//                    }
-//                }
-//            } else  {
-//                break;
-//            }
-//        }
-
-
-
     }
+
 
     public static void print(Double value) {
         System.out.println("Это тип Double, значение " + value);

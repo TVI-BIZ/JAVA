@@ -6,11 +6,11 @@ public class RepkaStory {
     static void tell(List<Person> items) {
         Person first;
         Person second;
-        for (int i = 0; i < items.size() - 1; i++) {
+        for (int i = items.size() - 1; i > 0; i--) {
             first = items.get(i - 1);
             second = items.get(i);
-            //first.pull(second);
-
+            first.pull(second);
+            //second.pull(first);
         }
     }
 }

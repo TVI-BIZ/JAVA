@@ -13,35 +13,18 @@ public class Solution {
         // напишите тут ваш код
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String fileName = reader.readLine();
+        reader.close();
         ArrayList<Integer> listTotal = new ArrayList<>();
 
         FileInputStream inputStream = new FileInputStream(fileName);
-        DataInputStream dataInputStream = new DataInputStream(inputStream);
         BufferedReader reader2 = new BufferedReader(new InputStreamReader(inputStream));
 
-        //int data;
-        //listTotal.add(data);
 
-        while (inputStream.available() > 0){
-            int data =  Integer.parseInt(String.valueOf(inputStream.read()));
-            int data2 = dataInputStream.read();
-            int data3 = reader2.read();
-            System.out.println("add data");
-            System.out.println(data3);
-            listTotal.add(data3);
+        while (reader2.ready()){
+            String data = reader2.readLine();
+            listTotal.add(Integer.parseInt(data));
         }
-        inputStream.close();
-
-
-
-
         ArrayList<Integer> listEven = new ArrayList<>();
-        System.out.println("fin_read!");
-        for(Integer elem: listTotal){
-            System.out.println(elem);
-        }
-
-        System.out.println("****");
         for(Integer elem: listTotal){
             if(elem % 2 == 0){
                 listEven.add(elem);
@@ -53,6 +36,6 @@ public class Solution {
             System.out.println(elem);
         }
 
-
+        reader2.close();
     }
 }

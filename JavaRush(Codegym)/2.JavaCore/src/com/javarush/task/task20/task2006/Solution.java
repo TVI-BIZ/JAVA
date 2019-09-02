@@ -25,19 +25,19 @@ public class Solution {
     }
 
     public static void main(String[] args) throws Exception {
-    Human human = new Human();
-        FileOutputStream fileOutputStream = new FileOutputStream("file1.dat");
-        ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
-        outputStream.writeObject(human);
-        fileOutputStream.close();
-        outputStream.close();
-
-        FileInputStream fileInputStream = new FileInputStream("file.dat");
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        Object object = objectInputStream.readObject();
-        fileInputStream.close();
-        objectInputStream.close();
-
-        Human newHuman = (Human) object;
+//    Human human = new Human();
+//        FileOutputStream fileOutputStream = new FileOutputStream("file1.dat");
+//        ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);
+//        outputStream.writeObject(human);
+//        fileOutputStream.close();
+//        outputStream.close();
+//
+//        FileInputStream fileInputStream = new FileInputStream("file.dat");
+//        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+//        Object object = objectInputStream.readObject();
+//        fileInputStream.close();
+//        objectInputStream.close();
+//
+//        Human newHuman = (Human) object;
     }
 }
