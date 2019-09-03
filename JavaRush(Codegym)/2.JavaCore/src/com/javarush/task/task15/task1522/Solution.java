@@ -9,15 +9,37 @@ import java.io.InputStreamReader;
 */
 
 public class Solution {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
     }
 
     public static Planet thePlanet;
 
     //add static block here - добавьте статический блок тут
+    static {
+        try {
+            readKeyFromConsoleAndInitPlanet();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-    public static void readKeyFromConsoleAndInitPlanet() {
+    }
+
+
+    public static void readKeyFromConsoleAndInitPlanet() throws IOException {
         // implement step #5 here - реализуйте задание №5 тут
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        String defName = reader.readLine();
+
+        if(defName.equals("sun")){
+            thePlanet = Sun.getInstance();
+        } else if (defName.equals("moon")){
+            thePlanet = Moon.getInstance();
+        } else if (defName.equals("earth")){
+            thePlanet = Earth.getInstance();
+        } else {
+            thePlanet = null;
+        }
+
     }
 }
