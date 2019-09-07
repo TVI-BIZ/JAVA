@@ -8,14 +8,13 @@ import java.util.List;
 
 public class Solution {
     public class TableInterfaceWrapper implements TableInterface {
-        public TableInterfaceWrapper(TableInterface interF){
+        public TableInterfaceWrapper(TableInterface table){
 
         }
 
-
         @Override
         public void setModel(List rows) {
-
+            System.out.println(rows);
         }
 
         @Override

@@ -31,6 +31,8 @@ public class Solution {
             gamer3.start();
 
             while (!isWinnerFound) {
+
+
             }
             gamer1.interrupt();
             gamer2.interrupt();
@@ -49,7 +51,13 @@ public class Solution {
         @Override
         public void run() {
             //Add your code here - добавь код тут
-
+            try {
+                Thread.sleep(1000/this.rating);
+                System.out.println(this.getName()+":"+OnlineGame.steps.get(0));
+                //OnlineGame.isWinnerFound = true;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

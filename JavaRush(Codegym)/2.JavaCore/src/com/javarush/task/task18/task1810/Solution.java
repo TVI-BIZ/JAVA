@@ -4,33 +4,24 @@ package com.javarush.task.task18.task1810;
 DownloadException
 */
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.nio.file.Files;
 
 public class Solution {
-    public static void main(String[] args) throws DownloadException {
+    public static void main(String[] args) throws DownloadException, IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String fileName = "";
 
-        try{
-           fileName = reader.readLine();
-        } catch (Exception e){
-
+        while (true){
+            String filename = reader.readLine();
+            InputStream fileInputStream = new FileInputStream(filename);
+            //long fileSize = new File(filename).length();
+            if(fileInputStream.available() < 1000){
+                reader.close();
+                fileInputStream.close();
+                throw new DownloadException();
+            }
         }
-
-        try{
-            FileInputStream inputStream = new FileInputStream(fileName);
-        } catch (Exception e){
-
-        }
-
-
-
-
-
     }
-
     public static class DownloadException extends Exception {
 
     }
