@@ -32,11 +32,13 @@ public class Solution {
 
             while (!isWinnerFound) {
 
-
             }
+
             gamer1.interrupt();
             gamer2.interrupt();
             gamer3.interrupt();
+
+
         }
     }
 
@@ -52,10 +54,19 @@ public class Solution {
         public void run() {
             //Add your code here - добавь код тут
             try {
-                Thread.sleep(1000/this.rating);
-                System.out.println(this.getName()+":"+OnlineGame.steps.get(0));
-                //OnlineGame.isWinnerFound = true;
+                    if(!OnlineGame.isWinnerFound) {
+
+
+                        for (int i = 0; i < OnlineGame.steps.size(); i++) {
+                            Thread.sleep(1000 / rating);
+                            System.out.println(this.getName() + ":" + OnlineGame.steps.get(i));
+                        }
+                        OnlineGame.isWinnerFound = true;
+                        System.out.println(this.getName() + ":победитель!");
+                    }
+
             } catch (InterruptedException e) {
+                System.out.println(this.getName() + ":проиграл");
                 e.printStackTrace();
             }
         }

@@ -33,7 +33,6 @@ public class Solution {
 
                 result.add(new User(id, name, level, lesson));
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
