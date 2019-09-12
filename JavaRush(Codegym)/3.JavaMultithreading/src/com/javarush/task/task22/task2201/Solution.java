@@ -36,8 +36,15 @@ public class Solution {
 
     public synchronized String getPartOfString(String string, String threadName) {
         if(string ==null) {
-            //throw new TooShortStringException();
+            if(threadName.equals("#1")){
+                throw new StringForFirstThreadTooShortException();
+            } else if(threadName.equals("#2")){
+                throw new StringForSecondThreadTooShortException();
+            } else {
+                throw new RuntimeException();
+            }
         }
+
         int tabCount = string.length() - string.replaceAll("\t","").length();
         int counter = 0;
         String resString = null;
@@ -49,17 +56,23 @@ public class Solution {
                 }
                 counter++;
             }
+            int lastTabPos = tabPositions.size()-1;
+            //System.out.println("lasttabPos " + lastTabPos);
+
             if(tabPositions.size() >= 2){
-                resString = string.substring(tabPositions.get(0)+1,tabPositions.get(1));
+                resString = string.substring(tabPositions.get(0)+1,tabPositions.get(lastTabPos));
             } else {
                 resString = string.substring(tabPositions.get(0)+1);
             }
         } else {
-            //throw  new TooShortStringException();
+            if(threadName.equals("#1")){
+                throw new StringForFirstThreadTooShortException();
+            } else if(threadName.equals("#2")){
+                throw new StringForSecondThreadTooShortException();
+            } else {
+                throw new RuntimeException();
+            }
         }
         return resString;
-
-
-        //return null;
     }
 }
