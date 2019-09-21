@@ -51,5 +51,14 @@ public class Space {
         rockets = new LinkedList<>();
         bombs = new LinkedList<>();
     }
+    public void run(){
+
+    }
+    public void draw(){
+
+    }
+    public void sleep(int ms){
+
+    }
 
 }
