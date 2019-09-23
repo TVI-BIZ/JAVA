@@ -55,6 +55,7 @@ public abstract class BaseObject {
      */
     public void move() {
         //do nothing
+
     }
 
     /**

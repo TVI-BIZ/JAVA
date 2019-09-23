@@ -10,6 +10,7 @@ public class Space {
     private List<Ufo> ufos;
     private List<Rocket> rockets;
     private List<Bomb> bombs;
+    public static Space game;
 
 
     public static void main(String[] args) {
@@ -55,6 +56,7 @@ public class Space {
 
     }
     public void draw(){
+
 
     }
     public void sleep(int ms){
