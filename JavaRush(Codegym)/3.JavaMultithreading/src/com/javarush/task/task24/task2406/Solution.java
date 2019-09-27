@@ -24,13 +24,17 @@ public class Solution {
     }
 
     public class Apt3Bedroom extends Building.Apartments {
-
+        public Apt3Bedroom(Building building){
+            building.super();
+        }
     }
     public class BigHall extends Building.Hall {
 
-        public BigHall(BigDecimal square) {
-            super(square);
+        public BigHall(BigDecimal square,Building building) {
+            building.super(square);
         }
+
+
     }
 
 }

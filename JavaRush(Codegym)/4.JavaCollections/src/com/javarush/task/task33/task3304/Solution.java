@@ -18,8 +18,6 @@ public class Solution {
     }
 
     public static Object convertOneToAnother(Object one, Class resultClassObject) throws IOException {
-
-
         return null;
     }
 
