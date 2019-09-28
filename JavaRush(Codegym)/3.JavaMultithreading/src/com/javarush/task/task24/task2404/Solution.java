@@ -14,11 +14,11 @@ public class Solution {
     }
 
     public static double getHeight(HasHeight rectangle) {
-        return rectangle.castToHasHeight();
+        return rectangle.getHeight();
     }
 
     public static double getWidth(HasWidth rectangle) {
-        return rectangle.castToHasWidth();
+        return rectangle.getWidth();
     }
 
 
@@ -35,7 +35,7 @@ public class Solution {
 
             class HasHeightImpl implements HasHeight {
                 @Override
-                public double castToHasHeight() {
+                public double getHeight() {
                     return Math.abs(point1.getY() - point2.getY());
                 }
             }
@@ -47,7 +47,7 @@ public class Solution {
             class HasWidthImpl implements HasWidth {
 
                 @Override
-                public double castToHasWidth() {
+                public double getWidth() {
                     return Math.abs(point1.getX() - point2.getX());
                 }
             }
