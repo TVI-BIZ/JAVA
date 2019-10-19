@@ -11,18 +11,7 @@ public class Solution {
 
     private int countItems;
 
-    Iterator localIterator = new Iterator() {
-        @Override
-        public Iterator next() {
-            return this;
-        }
-    };
-
-
     public Iterator getIterator(final String name) {
-
-
-
         class LocalIterator implements Iterator {
             public LocalIterator() {
                 countItems++;
