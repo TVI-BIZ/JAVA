@@ -41,9 +41,15 @@ public class Solution {
     }
 
     public static void sort(List<Stock> list) {
+
+
         list.sort(new Comparator<Stock>() {
             public int compare(Stock stock1, Stock stock2) {
-                return 0;
+                //System.out.println(stock1.get("name").hashCode());
+
+
+
+                return stock1.get("name").hashCode();
             }
         });
     }
