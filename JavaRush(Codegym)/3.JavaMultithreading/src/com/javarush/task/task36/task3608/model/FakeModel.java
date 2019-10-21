@@ -27,9 +27,6 @@ public class FakeModel implements Model {
 
         modelData.setUsers(usersList2);
 
-
-
-
     }
 
     @Override
@@ -37,6 +34,21 @@ public class FakeModel implements Model {
          List<User> users = userService.getAllDeletedUsers();
          throw new UnsupportedOperationException();
 
+    }
+
+    @Override
+    public void loadUserById(long userId) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void deleteUserById(long id) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void changeUserData(String name, long id, int level) {
+        throw new UnsupportedOperationException();
     }
 
     private ModelData modelData = new ModelData();
