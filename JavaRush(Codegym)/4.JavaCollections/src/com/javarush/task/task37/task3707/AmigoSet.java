@@ -1,6 +1,9 @@
 package com.javarush.task.task37.task3707;
 
 import java.awt.List;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.*;
 
@@ -28,11 +31,7 @@ public class AmigoSet<E> extends AbstractSet implements Serializable,Cloneable, 
 
     @Override
     public Iterator<E> iterator() {
-        ArrayList<E> keysList = new ArrayList<>();
-        for(Map.Entry elem:map.entrySet()){
-            keysList.add((E) elem.getKey());
-        }
-        return (Iterator<E>) keysList;
+        return map.keySet().iterator();
     }
 
     @Override
@@ -42,21 +41,95 @@ public class AmigoSet<E> extends AbstractSet implements Serializable,Cloneable, 
 
     @Override
     public boolean isEmpty() {
-        return super.isEmpty();
+        if(map.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
     public boolean contains(Object o) {
-        return super.contains(o);
+        if(map.containsKey(o)){
+            return true;
+        }else {
+            return false;
+        }
     }
 
     @Override
     public void clear() {
-        super.clear();
+        map.clear();
     }
 
     @Override
     public boolean remove(Object o) {
+        map.remove(o);
         return super.remove(o);
     }
+
+    @Override
+    public Object clone() throws InternalError {
+
+        try{
+            AmigoSet newAmigo = (AmigoSet) super.clone();
+            newAmigo.map = (HashMap)map.clone();
+            return newAmigo;
+        }catch (Exception e){
+            throw new InternalError();
+        }
+    }
+    private void writeObject(ObjectOutputStream paramOne) throws IOException {
+        paramOne.defaultWriteObject();
+
+        paramOne.writeInt(HashMapReflectionHelper.callHiddenMethod(map,"capacity"));
+        paramOne.writeFloat(HashMapReflectionHelper.callHiddenMethod(map, "loadFactor"));
+        paramOne.writeInt(map.size());
+
+        for(E e:map.keySet()) paramOne.writeObject(e);
+
+    }
+    private void readObject(ObjectInputStream paramOne) throws IOException, ClassNotFoundException {
+        paramOne.defaultReadObject();
+
+        int capacity = paramOne.readInt();
+        float loadFactor = paramOne.readFloat();
+        int size = paramOne.readInt();
+
+        map = new HashMap<>(capacity,loadFactor);
+        for(int i=0; i < size; i++){
+            E e = (E) paramOne.readObject();
+            map.put(e,PRESENT);
+        }
+
+    }
+    @Override
+    public boolean equals(Object o) {
+
+        if ((o == null)||!(o instanceof AmigoSet )) return false;
+
+        if (this.hashCode()!= ((AmigoSet)o).hashCode()) return false;
+        AmigoSet<E> compare = (AmigoSet)o;
+        if (this.map.size()!= compare.map.size()) return false;
+        for (E e: map.keySet()){
+            if (!compare.contains(e)) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return this.map.hashCode()*31+PRESENT.hashCode();
+    }
+
+    @Override
+    public Object[] toArray() {
+        return this.map.keySet().toArray();
+    }
+
+//    @Override
+//    public <T> T[] toArray(T[] a) {
+//        return this.map.keySet().toArray(a);
+//    }
+
 }
