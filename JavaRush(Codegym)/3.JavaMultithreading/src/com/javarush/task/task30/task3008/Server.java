@@ -30,62 +30,73 @@ public class Server {
         public Handler(Socket socket) {
             this.socket = socket;
         }
-       private String serverHandshake(Connection connection) throws IOException,ClassNotFoundException {
-            Message reply=null;
-           Message reqMessage = new Message(MessageType.NAME_REQUEST);
-           Message acceptMessage = new Message(MessageType.NAME_ACCEPTED);
 
-//           while (true){
-//
-//
-//           }
+        private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException{
+            Message request = new Message(MessageType.NAME_REQUEST);
+            Message response;
+            String name;
 
-           connection.send(reqMessage);
-           while ((reply=connection.receive()).getType() != MessageType.USER_NAME ){
-               connection.send(new Message(MessageType.NAME_REQUEST));
-           }
+            do {
+                connection.send(request);
+                response = connection.receive();
+                name = response.getData();
+            } while (response.getType() != MessageType.USER_NAME || name.isEmpty() || connectionMap.containsKey(name));
 
-//           if(reply.getData().isEmpty()){
-//               connection.send(new Message(MessageType.NAME_REQUEST));
-//           }
+             connectionMap.put(name, connection);
+             connection.send(new Message(MessageType.NAME_ACCEPTED));
+            
+            return name;
 
+        }
+        public void run(){
+            ConsoleHelper.writeMessage("Connection established with server: "+socket.getRemoteSocketAddress());
+            try {
+                Connection connection = new Connection(socket);
+                String userName = serverHandshake(connection);
+                sendBroadcastMessage(new Message(MessageType.USER_ADDED,userName));
+                notifyUsers(connection,userName);
+                serverMainLoop(connection,userName);
+                if(userName != null){
+                    connectionMap.remove(userName);
+                    sendBroadcastMessage(new Message(MessageType.USER_REMOVED,userName));
+                }
 
+            } catch (IOException | ClassNotFoundException e) {
+                e.printStackTrace();
+            }
 
-           if (reply.getType() == MessageType.USER_NAME &&
-                   !reply.getData().isEmpty() &&
-                   !connectionMap.containsKey(reply.getData())){
-               connectionMap.put(reply.getData(),connection);
-               connection.send(acceptMessage);
-           } else {
-               connection.send(reqMessage);
-           }
-
-
-
-//                reply = connection.receive();
-//                while (connection.receive().getType() != MessageType.USER_NAME){
-//                    connection.send(reqMessage);
-//                }
-
-//                    if(!reply.getData().isEmpty() && !connectionMap.containsKey(reply.getData())){
-//                        connectionMap.put(reply.getData(),connection);
-//                        } else {
-//                            connection.send(reqMessage);
-//                    }
-
-                //connection.send(acceptMessage);
-
-            return reply.getData();
+        }
 
 
 
+        private void notifyUsers(Connection connection, String userName) throws IOException{
+            for(Map.Entry<String,Connection> element: connectionMap.entrySet()){
+                String name = element.getKey();
+                if(!name.equals(userName)){
+                    Message newmessage = new Message(MessageType.USER_ADDED,name);
+                    connection.send(newmessage);
+                }
+            }
+
+        }
 
 
-       }
-
-
+        private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException{
+            while (true){
+                Message reply = connection.receive();
+                String newmessage;
+                if (reply.getType()==MessageType.TEXT){
+                    newmessage = userName + ":" + " " + reply.getData();
+                    sendBroadcastMessage(new Message(MessageType.TEXT,newmessage));
+                } else {
+                    ConsoleHelper.writeMessage("Error!");
+                }
+            }
+        }
 
     }
+
+
     public static void sendBroadcastMessage(Message message) throws IOException {
         for(Map.Entry<String,Connection> elem: connectionMap.entrySet()){
             try{
@@ -95,5 +106,6 @@ public class Server {
             }
         }
     }
+
 
 }

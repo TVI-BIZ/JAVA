@@ -36,11 +36,11 @@ public class Solution {
 
     public synchronized String getPartOfString(String string, String threadName) {
         if(string ==null) {
-            if(threadName.equals("#1")){
+            if(threadName.equals(Solution.FIRST_THREAD_NAME)){
                 throw new StringForFirstThreadTooShortException();
-            } else if(threadName.equals("#2")){
+            } else if(threadName.equals(Solution.SECOND_THREAD_NAME)){
                 throw new StringForSecondThreadTooShortException();
-            } else {
+            } else  {
                 throw new RuntimeException();
             }
         }
