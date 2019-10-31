@@ -4,19 +4,6 @@ public class MyThread extends Thread {
 
 
     public MyThread() {
-        for(int i = MIN_PRIORITY; i < MAX_PRIORITY+1;i++){
-                this.setPriority(i);
-//            if(this.getThreadGroup() != null){
-//                if(i>this.getThreadGroup().getMaxPriority()){
-//                this.setPriority(i);
-//                }
-//            } else {
-//                this.setPriority(i);
-//            }
-        }
-
-
-
     }
 
     public MyThread(Runnable target) {
