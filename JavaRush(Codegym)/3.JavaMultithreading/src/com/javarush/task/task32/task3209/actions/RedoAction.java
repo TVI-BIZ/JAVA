@@ -6,9 +6,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class RedoAction extends AbstractAction {
-    public View view;
+    private View view;
+
+
+
     @Override
     public void actionPerformed(ActionEvent e) {
+        view.redo();
 
     }
     public RedoAction(View view) {

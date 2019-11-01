@@ -9,7 +9,7 @@ public class UndoAction extends AbstractAction {
     private View view;
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        view.undo();
     }
 
     public UndoAction(View view) {
