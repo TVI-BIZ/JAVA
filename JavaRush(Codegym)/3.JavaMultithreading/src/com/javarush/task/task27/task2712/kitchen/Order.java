@@ -10,14 +10,11 @@ public class Order {
     private final Tablet tablet;
     protected List<Dish> dishes;
 
-    public Order(Tablet tablet) {
-        this.tablet = tablet;
-    }
-
-    public Order(List<Dish> dishes, Tablet tablet) throws IOException {
+    public Order(Tablet tablet) throws IOException {
         this.tablet = tablet;
         this.dishes = ConsoleHelper.getAllDishesForOrder();
     }
+
 
     @Override
     public String toString() {
@@ -25,11 +22,26 @@ public class Order {
         if(dishes.size() == 0){
             return "";
         } else{
-            for(Dish elem:dishes){
-                res += elem.toString();
-            }
-            //return res;
+            res = dishes.toString();
+            return "Your order: "+ res + " of " + tablet;
         }
-        return "Your order:"+ res + "of Tablet" + tablet;
     }
+
+    public int getTotalCookingTime(){
+//        int res = 0;
+//        for (Dish elem:dishes){
+//            res += elem.getDuration();
+//        }
+
+        return dishes.stream().mapToInt(Dish::getDuration).sum();
+    }
+
+    public boolean isEmpty(){
+        if(dishes.size()==0){
+           return true;
+        } else {
+            return false;
+        }
+    }
+
 }
