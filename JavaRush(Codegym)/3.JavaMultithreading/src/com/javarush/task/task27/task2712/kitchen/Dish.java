@@ -16,7 +16,7 @@ public enum Dish{
 
 
     Dish(int duration) {
-
+        this.duration = duration;
     }
 
     public static String allDishesToString(){

@@ -28,12 +28,11 @@ public class Order {
     }
 
     public int getTotalCookingTime(){
-//        int res = 0;
-//        for (Dish elem:dishes){
-//            res += elem.getDuration();
-//        }
-
-        return dishes.stream().mapToInt(Dish::getDuration).sum();
+        int res = 0;
+        for (Dish elem:dishes){
+            res += elem.getDuration();
+        }
+        return res;
     }
 
     public boolean isEmpty(){
