@@ -5,6 +5,7 @@ import com.javarush.task.task27.task2712.kitchen.Cook;
 import com.javarush.task.task27.task2712.kitchen.Dish;
 import com.javarush.task.task27.task2712.kitchen.Order;
 import com.javarush.task.task27.task2712.kitchen.Waiter;
+import com.javarush.task.task27.task2712.statistic.StatisticManager;
 import javafx.beans.InvalidationListener;
 
 import java.io.IOException;
@@ -16,17 +17,20 @@ public class Restaurant {
        Cook newCook = new Cook("Piter Parker");
         Waiter newWaiter = new Waiter();
 
-          newTablet.createOrder();
-        newTablet.createOrder();
-        newTablet.createOrder();
-        newTablet.createOrder();
 
         newTablet.addObserver(newCook);
+        newTablet.createOrder();
         newCook.addObserver(newWaiter);
 
-        //System.out.println(newCook.update(newCook.,newTablet.createOrder()));
-      //System.out.println(newTablet.createOrder().getTotalCookingTime());
+        DirectorTablet directorTablet = new DirectorTablet();
+        directorTablet.printActiveVideoSet();
+        directorTablet.printAdvertisementProfit();
+        directorTablet.printArchivedVideoSet();
+        directorTablet.printCookWorkloading();
+//
+        StatisticManager sm = StatisticManager.getInstance();
+        sm.getAdvDataStorage();
 
-//        new AdvertisementManager(4200).processVideos();
+
     }
 }

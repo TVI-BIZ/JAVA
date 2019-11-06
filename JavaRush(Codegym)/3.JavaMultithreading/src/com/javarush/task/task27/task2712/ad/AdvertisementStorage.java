@@ -18,14 +18,16 @@ public class AdvertisementStorage {
         videos.add(new Advertisement(someContent, "Third Video", 400,
                 2, 10 * 60)); //10 min
         videos.add(new Advertisement(someContent, "Fourth Video", 400,
-                2, 15 * 60)); //10 min
+                2, 8 * 60)); //10 min
         videos.add(new Advertisement(someContent, "Fifth Video", 400,
                 2, 10 * 60)); //10 min
 
-
-
-
     }
+    public AdvertisementStorage get(){
+        return single_instance;
+    }
+
+
 
     public static AdvertisementStorage getInstance(){
         if(single_instance == null){

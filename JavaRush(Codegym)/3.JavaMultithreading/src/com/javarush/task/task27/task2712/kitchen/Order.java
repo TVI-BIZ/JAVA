@@ -7,7 +7,16 @@ import java.io.IOException;
 import java.util.List;
 
 public class Order {
+    public Tablet getTablet() {
+        return tablet;
+    }
+
     private final Tablet tablet;
+
+    public List<Dish> getDishes() {
+        return dishes;
+    }
+
     protected List<Dish> dishes;
 
     public Order(Tablet tablet) throws IOException {

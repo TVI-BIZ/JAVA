@@ -1,7 +1,9 @@
 package com.javarush.task.task27.task2712;
 
+import com.javarush.task.task27.task2712.ad.AdvertisementStorage;
 import com.javarush.task.task27.task2712.kitchen.Dish;
 import com.javarush.task.task27.task2712.kitchen.Order;
+import com.javarush.task.task27.task2712.statistic.StatisticManager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -25,7 +27,7 @@ public class ConsoleHelper {
 
     public static List<Dish> getAllDishesForOrder() throws IOException {
         List<Dish> dishList = new ArrayList<>();
-        writeMessage("Dear Customer!\nPlease choose dish from menu.");
+        writeMessage("Choose dish.");
         writeMessage(Dish.allDishesToString());
         String choosedDish;
 
@@ -39,7 +41,7 @@ public class ConsoleHelper {
            }
 
            if(dishFlag == false){
-               writeMessage("This dish is not in our menu.");
+               writeMessage("This not valid");
            } else {
                try {
                    Dish dishFromMenu = Dish.valueOf(choosedDish);
