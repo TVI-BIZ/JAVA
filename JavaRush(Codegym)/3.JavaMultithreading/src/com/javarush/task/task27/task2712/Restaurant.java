@@ -15,6 +15,7 @@ public class Restaurant {
     public static void main(String[] args) throws IOException {
        Tablet newTablet =  new Tablet(2);
        Cook newCook = new Cook("Piter Parker");
+       Cook newCook2 = new Cook("COOK2");
         Waiter newWaiter = new Waiter();
 
 
@@ -22,14 +23,20 @@ public class Restaurant {
         newTablet.createOrder();
         newCook.addObserver(newWaiter);
 
+        newTablet.addObserver(newCook2);
+        newTablet.createOrder();
+        newCook2.addObserver(newWaiter);
+
+
+
         DirectorTablet directorTablet = new DirectorTablet();
         directorTablet.printActiveVideoSet();
         directorTablet.printAdvertisementProfit();
         directorTablet.printArchivedVideoSet();
         directorTablet.printCookWorkloading();
 //
-        StatisticManager sm = StatisticManager.getInstance();
-        sm.getAdvDataStorage();
+//        StatisticManager sm = StatisticManager.getInstance();
+//        sm.getAdvDataStorage();
 
 
     }

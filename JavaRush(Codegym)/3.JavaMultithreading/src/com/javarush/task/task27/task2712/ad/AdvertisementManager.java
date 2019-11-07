@@ -39,7 +39,6 @@ public class AdvertisementManager {
     }
 
 
-
     public void processVideos(){
         if(storage.list().isEmpty()){
             throw new NoVideoAvailableException();
@@ -72,6 +71,8 @@ public class AdvertisementManager {
             }
 
             StatisticManager.getInstance().register(new VideoSelectedEventDataRow(listFinal,totalAmountCounter(listFinal),totalDurationCounter(listFinal)));
+
+
 
             for(Advertisement elem:listFinal){
                 if(elem.getHits()>0) {
