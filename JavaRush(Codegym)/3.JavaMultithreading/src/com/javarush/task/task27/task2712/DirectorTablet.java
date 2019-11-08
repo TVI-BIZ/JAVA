@@ -1,5 +1,7 @@
 package com.javarush.task.task27.task2712;
 
+import com.javarush.task.task27.task2712.ad.Advertisement;
+import com.javarush.task.task27.task2712.ad.StatisticAdvertisementManager;
 import com.javarush.task.task27.task2712.statistic.StatisticManager;
 
 import java.math.BigDecimal;
@@ -7,40 +9,30 @@ import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 public class DirectorTablet {
    StatisticManager statisticManager = StatisticManager.getInstance();
+   StatisticAdvertisementManager statisticAdvertisementManager = StatisticAdvertisementManager.getInstance();
 
    public void printAdvertisementProfit() {
-      double totalMoney3 = 0;
-       DecimalFormat df2 = new DecimalFormat("#.##");
-      //long totalMoney2 = 0;
-      //To DO REFACTOR!
-      Map<String,Double> moneyList2 = statisticManager.getAdvDataStorage3();
-      Map<Date,Double> finalMoneyList = statisticManager.stringToDataList(moneyList2);
-      String pattern = "dd-MMM-yyyy";
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-      for(Map.Entry<Date,Double> elem:finalMoneyList.entrySet()){
-         //totalMoney2 += elem.getValue();
-         totalMoney3 += elem.getValue();
-         if((double)elem.getValue()/100>0) {
-            System.out.println(simpleDateFormat.format(elem.getKey()) + " - " + (double) elem.getValue() / 100);
+      double totalMoney4 = 0;
+      Map<String,Double> moneyList4 = statisticManager.getAdvDataStorage4();
+      for(Map.Entry<String,Double> elem:moneyList4.entrySet()){
+         totalMoney4 += elem.getValue();
+         if((double)elem.getValue()>0) {
+            System.out.println((elem.getKey()) + " - " + (double) elem.getValue() / 100);
          }
       }
-      if(totalMoney3>0){
-         System.out.println("Total - "+ (double)totalMoney3/100 );
+      if(totalMoney4>0){
+         System.out.println("Total - "+ (double)totalMoney4/100 );
       }
    }
+
    public void printCookWorkloading(){
       Map<String,Map<String,Integer>> cookList2 = statisticManager.getCookDataStorage2();
-      Map<Date,Map<String,Integer>> finalCookList = statisticManager.stringToDataList2(cookList2);
-      String pattern = "dd-MMM-yyyy";
-      SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-      for(Map.Entry<Date,Map<String,Integer>> elem:finalCookList.entrySet() ){
-         System.out.println(simpleDateFormat.format(elem.getKey()));
+      for(Map.Entry<String,Map<String,Integer>> elem:cookList2.entrySet() ){
+         System.out.println(elem.getKey());
          Map<String,Integer> cookTime = elem.getValue();
          for (Map.Entry<String,Integer> elem2: cookTime.entrySet()){
             if(elem2.getValue() !=0){
@@ -49,15 +41,28 @@ public class DirectorTablet {
          }
          System.out.println("");
       }
-
-
-
-
    }
+
    public void printActiveVideoSet(){
+     List<Advertisement> advList =  statisticAdvertisementManager.getActiveVideosFromStorage();
+      advList.sort(Comparator.comparing(Advertisement::getName));
+
+      for(Advertisement elem: advList){
+         System.out.println(elem.getName()+" - "+elem.getHits());
+      }
+
 
    }
    public void printArchivedVideoSet(){
+      List<Advertisement> advList =  statisticAdvertisementManager.getNonActiveVideosFromStorage();
+      List<String> nameList = new ArrayList<>();
+      for(Advertisement elem: advList){
+         nameList.add(elem.getName());
+      }
+      nameList.sort(String::compareToIgnoreCase);
+      for(String elem:nameList){
+         System.out.println(elem);
+      }
 
    }
 

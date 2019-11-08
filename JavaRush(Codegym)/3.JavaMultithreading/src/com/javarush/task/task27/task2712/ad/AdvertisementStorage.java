@@ -12,15 +12,17 @@ public class AdvertisementStorage {
     private AdvertisementStorage() {
         Object someContent = new Object();
         videos.add(new Advertisement(someContent, "First Video", 5000,
-                98, 3 * 60)); // 3 min
+                97, 3 * 60)); // 3 min
         videos.add(new Advertisement(someContent, "Second Video", 100,
                 10, 15 * 60)); //15 min
         videos.add(new Advertisement(someContent, "Third Video", 400,
-                2, 10 * 60)); //10 min
+                5, 10 * 60)); //10 min
         videos.add(new Advertisement(someContent, "Fourth Video", 400,
                 2, 8 * 60)); //8 min
         videos.add(new Advertisement(someContent, "Fifth Video", 400,
                 2, 10 * 60)); //10 min
+        videos.add(new Advertisement(someContent, "Пятое видео", 400,
+                4, 10 * 60)); //10 min
 
     }
 

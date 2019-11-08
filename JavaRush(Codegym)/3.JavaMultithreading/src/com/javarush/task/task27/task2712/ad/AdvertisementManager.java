@@ -45,8 +45,6 @@ public class AdvertisementManager {
 
         } else {
             int orderTime = this.timeSeconds;
-
-
             List<Advertisement> listBiggerZero = new ArrayList<>();
             List<Advertisement> listFinal = new ArrayList<>();
 

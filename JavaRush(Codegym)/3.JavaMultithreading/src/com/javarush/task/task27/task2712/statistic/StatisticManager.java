@@ -18,6 +18,12 @@ import java.util.logging.SimpleFormatter;
 public class StatisticManager {
     private static StatisticManager static_single_instance = null;
     private StatisticStorage statisticStorage = new StatisticStorage();
+
+    public Set<Cook> getCooks() {
+        return cooks;
+    }
+
+
     private Set<Cook> cooks = new HashSet<>();
 
 
@@ -30,43 +36,17 @@ public class StatisticManager {
     }
 
     private StatisticManager() {
-
     }
 
     public void register(EventDataRow data){
+
         statisticStorage.put(data);
     }
 
-    public void register(Cook cook){
-        cooks.add(cook);
-    }
 
-//    public Map<String,Long> getAdvDataStorage(){
-//        Map<String,Long> dailyProfit = new HashMap<>();
-//        String pattern = "dd-MMM-yyyy";
-//        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-//
-//        Map<EventType, List<EventDataRow>> fromStorage =  this.statisticStorage.getStorage();
-//        for (Map.Entry<EventType, List<EventDataRow>> elem: fromStorage.entrySet()){
-//            if(elem.getKey() == EventType.SELECTED_VIDEOS){
-//               for (EventDataRow elem2:elem.getValue()){
-//                   VideoSelectedEventDataRow selectedVideos = (VideoSelectedEventDataRow)elem2;
-//                   String profitDate = simpleDateFormat.format(elem2.getDate());
-//
-//                   if(dailyProfit.containsKey(profitDate)){
-//                       Long newSum = dailyProfit.get(profitDate)+selectedVideos.getAmount();
-//                       dailyProfit.put(profitDate,newSum);
-//                   } else {
-//                       dailyProfit.put(profitDate,selectedVideos.getAmount());
-//                   }
-//                }
-//            }
-//        }
-//        return dailyProfit;
-//    }
 
-    public Map<String,Double> getAdvDataStorage3(){
-        Map<String,Double> dailyProfit = new HashMap<>();
+    public Map<String,Double> getAdvDataStorage4(){
+        Map<String,Double> dailyProfit = new TreeMap<>(Collections.reverseOrder());
         String pattern = "dd-MMM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
@@ -87,33 +67,6 @@ public class StatisticManager {
         }
         return dailyProfit;
     }
-
-
-//    public Map<Date,Double> secondAttempt(){
-//        List<EventDataRow> eventList = new ArrayList<>();
-//        Map<EventType, List<EventDataRow>> fromStorage =  this.statisticStorage.getStorage();
-//        for (Map.Entry<EventType, List<EventDataRow>> elem: fromStorage.entrySet()){
-//            if(elem.getKey() == EventType.SELECTED_VIDEOS) {
-//                for (EventDataRow elem2 : elem.getValue()) {
-//                    eventList.add(elem2);
-//                }
-//            }
-//        }
-//        Map<Date,Double> resMap = new TreeMap<>();
-//        Map<Date,Double> reverseResMap = new TreeMap<>();
-//        reverseResMap = ((TreeMap<Date, Double>) resMap).descendingMap();
-//
-//        for(EventDataRow elem: eventList){
-//            VideoSelectedEventDataRow selectedEvent = (VideoSelectedEventDataRow)elem;
-//
-//        }
-//        return null;
-//
-//    }
-
-
-
-
 
     public Map<Date,Double> stringToDataList(Map<String,Double> oldmap )  {
         Map<Date,Double> finalList = new TreeMap<>(Collections.reverseOrder());
@@ -140,10 +93,8 @@ public class StatisticManager {
         return finalList;
     }
 
-
-
     public Map<String,Map<String,Integer>> getCookDataStorage2(){
-        Map<String,Map<String,Integer>> dailyCook = new HashMap<>();
+        Map<String,Map<String,Integer>> dailyCook = new TreeMap<>(Collections.reverseOrder());
         String pattern = "dd-MMM-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         Map<EventType, List<EventDataRow>> fromStorage =  this.statisticStorage.getStorage();
@@ -154,10 +105,11 @@ public class StatisticManager {
                     CookedOrderEventDataRow cookedOrder = (CookedOrderEventDataRow)elem2;
                     String cookName = cookedOrder.getCookName();
                     String cookDate = simpleDateFormat.format(elem2.getDate());
-                    if(dailyCook.containsKey(cookDate)){
-                        Map<String,Integer> oldMap = dailyCook.get(cookName);
 
-                        for(Map.Entry<String,Integer> elem3: oldMap.entrySet()){
+                    if(dailyCook.containsKey(cookDate)){
+
+                        Map<String,Integer> oldMap = dailyCook.get(cookDate);
+                        for(Map.Entry<String,Integer> elem3: dailyCook.get(cookDate).entrySet()){
                             if(elem3.getKey().equals(cookName)){
                                 Integer newSum = oldMap.get(cookName)+cookedOrder.getTime();
                                 oldMap.put(cookName,newSum);
@@ -173,16 +125,9 @@ public class StatisticManager {
                 }
             }
         }
-//        for(Map.Entry<String,Long> elem: dailyProfit.entrySet()){
-//            System.out.println(elem);
-//        }
+
         return dailyCook;
     }
-
-
-
-
-
 
 
 

@@ -40,7 +40,7 @@ public class VideoSelectedEventDataRow implements EventDataRow {
     @Override
     public int getTime() {
         return totalDuration;
-    }
+    } //min
 
 
 
