@@ -12,7 +12,6 @@ public class OurHashMapStorageStrategy implements StorageStrategy {
 
     @Override
     public boolean containsKey(Long key) {
-        //return false;
         return getEntry(key) != null;
     }
 
