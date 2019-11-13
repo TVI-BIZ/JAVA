@@ -32,6 +32,6 @@ public class Solution<T> extends ArrayList<T> {
     @Override
     public Iterator<T> iterator() {
         return super.iterator();
-        
+
     }
 }
