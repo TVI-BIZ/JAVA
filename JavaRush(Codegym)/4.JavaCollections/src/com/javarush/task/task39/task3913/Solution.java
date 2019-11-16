@@ -41,13 +41,45 @@ public class Solution {
 //        System.out.println(logParser.getAllSolvedTasksAndTheirNumber(null,null));
 //        System.out.println(logParser.getAllDoneTasksAndTheirNumber(null,null));
         //Part5;
-//        System.out.println(logParser.execute("get ip"));
-//        System.out.println(logParser.execute("get user"));
-//        System.out.println(logParser.execute("get date"));
-//        System.out.println(logParser.execute("get event"));
-//        System.out.println(logParser.execute("get status"));
+        System.out.println("***********SMALL************");
+        System.out.println(logParser.execute("get ip"));
+        System.out.println(logParser.execute("get user"));
+        System.out.println(logParser.execute("get date"));
+        System.out.println(logParser.execute("get event"));
+        System.out.println(logParser.execute("get status"));
+
         //Part6
+        System.out.println("***********MEDIUM************");
+       // System.out.println(logParser.execute("get ip for user = \"Eduard Petrovich Morozko\""));
         System.out.println(logParser.execute("get ip for user = \"Amigo\""));
+        System.out.println(logParser.execute("get ip for date = \"12.12.2013 21:56:30\""));
+        System.out.println(logParser.execute("get ip for event = \"LOGIN\""));
+
+        System.out.println(logParser.execute("get user for ip = \"146.34.15.5\""));
+//        System.out.println(logParser.execute("get ip for date = \"13.09.2013 5:04:50\""));
+        //System.out.println(logParser.execute("get user for event = \"DONE_TASK\""));
+//        System.out.println(logParser.execute("get date for event = \"SOLVE_TASK\""));
+//        System.out.println(logParser.execute("get status for event = \"SOLVE_TASK\""));
+//        System.out.println(logParser.execute("get event for date = \"30.08.2012 16:08:40\""));
+//        System.out.println(logParser.execute("get event for date = \"03.01.2014 03:45:23\""));
+//        System.out.println(logParser.execute("get event for date = \"30.01.2014 12:56:22\""));
+//        System.out.println(logParser.execute("get event for status = \"ERROR\""));
+//        System.out.println(logParser.execute("get date for user = \"Eduard Petrovich Morozko\""));
+//        System.out.println(logParser.execute("get date for user = \"Amigo\""));
+//        System.out.println(logParser.execute("get user for event=\"SOLVE_TASK\""));
+//        System.out.println(logParser.execute("get user for event=\"SOLVE_TASK\""));
+//        System.out.println(logParser.execute("get user for event=\"SOLVE_TASK\""));
+        //Part7
+        System.out.println("***********BIG************");
+        System.out.println(logParser.execute("get ip for user = \"Eduard Petrovich Morozko\" and date between \"11.12.2013 0:00:00\" and \"03.01.2014 23:59:59\"."));
+        System.out.println(logParser.execute("get ip for date = \"12.12.2013 21:56:30\" and date between \"11.12.2013 0:00:00\" and \"03.01.2014 23:59:59\"."));
+        System.out.println(logParser.execute("get ip for event = \"SOLVE_TASK\" and date between \"03.01.2014 03:45:22\" and \"29.2.2028 5:4:7\"."));
+        System.out.println(logParser.execute("get ip for status = \"FAILED\" and date between \"30.08.2012 16:08:13\" and \"29.2.2028 5:4:7\"."));
+
+        System.out.println(logParser.execute("get user for ip = \"127.0.0.1\" and date between \"11.12.2013 0:00:00\" and \"03.01.2014 23:59:59\"."));
+        System.out.println(logParser.execute("get user for date = \"12.12.2013 21:56:30\" and date between \"11.12.2013 0:00:00\" and \"03.01.2014 23:59:59\"."));
+        System.out.println(logParser.execute("get user for event = \"WRITE_MESSAGE\" and date between \"11.12.2013 0:00:00\" and \"03.01.2014 23:59:59\"."));
+        System.out.println(logParser.execute("get user for status = \"OK\" and date between \"11.12.2013 0:00:00\" and \"03.01.2014 23:59:59\"."));
 
 
     }
