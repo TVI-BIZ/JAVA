@@ -1,6 +1,8 @@
 package com.javarush.task.task28.task2810.model;
 
 import com.javarush.task.task28.task2810.vo.Vacancy;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,12 +20,10 @@ public class Provider {
     }
 
     public List<Vacancy> getJavaVacancies(String searchString){
-        //System.out.println(searchString);
         if(searchString==null){
+
             return Collections.EMPTY_LIST;
         }
-        //strategy.getVacancies(searchString);
-        //return Collections.EMPTY_LIST;
         return strategy.getVacancies(searchString);
     }
 
