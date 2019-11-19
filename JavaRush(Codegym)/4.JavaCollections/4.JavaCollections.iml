@@ -34,5 +34,9 @@
     <orderEntry type="library" name="org.junit.vintage:junit-vintage-engine:4.12.0" level="project" />
     <orderEntry type="module" module-name="3.JavaMultithreading" />
     <orderEntry type="library" name="jsoup-1.9.2" level="project" />
+    <orderEntry type="library" name="org.apache.httpcomponents:httpclient:4.5.10" level="project" />
+    <orderEntry type="library" name="javax.mail" level="project" />
+    <orderEntry type="library" name="com.sun.mail:javax.mail:1.5.0" level="project" />
+    <orderEntry type="library" name="javax.mail:javax.mail-api:1.5.0" level="project" />
   </component>
 </module>
