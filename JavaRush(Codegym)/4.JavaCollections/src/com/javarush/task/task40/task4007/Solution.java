@@ -8,6 +8,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoField;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 /* 
 Работа с датами
@@ -25,34 +26,65 @@ public class Solution {
     public static void printDate(String date) {
         //напишите тут ваш код
         Calendar calendar = Calendar.getInstance();
-        DateFormat formatter1 = new SimpleDateFormat("dd.MM.YYYY H:m:s");
-        DateFormat formatter2 = new SimpleDateFormat("DD.M.yyyy");
+        DateFormat formatter1 = new SimpleDateFormat("dd.MM.yyy H:m:s");
+        DateFormat formatter2 = new SimpleDateFormat("dd.M.yyy");
         DateFormat formatter3 = new SimpleDateFormat("hh:mm:ss");
 
         Date ourDate = null;
 
         try {
             ourDate=formatter1.parse(date);
-            System.out.println(ourDate);
+            calendar.setTime(ourDate);
+
+           // System.out.println("Для \""+date+"\" вывод должен быть:");
+            System.out.println("День: " + calendar.get(Calendar.DATE));
+            System.out.println("День недели: " + ((calendar.get(Calendar.DAY_OF_WEEK) - 1) == 0 ? 7 : calendar.get(Calendar.DAY_OF_WEEK) - 1));
+            System.out.println("День месяца: " + calendar.get(Calendar.DAY_OF_MONTH));
+            System.out.println("День года: " + calendar.get(Calendar.DAY_OF_YEAR));
+            System.out.println("Неделя месяца: " + (calendar.get(Calendar.WEEK_OF_MONTH)));
+            System.out.println("Неделя года: " + calendar.get(Calendar.WEEK_OF_YEAR));
+            System.out.println("Месяц: " + (calendar.get(Calendar.MONTH)+1));
+            System.out.println("Год: " + calendar.get(Calendar.YEAR));
+            System.out.println("AM или PM: " + calendar.getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.ENGLISH));
+            System.out.println("Часы: " + calendar.get(Calendar.HOUR));
+            System.out.println("Часы дня: " + calendar.get(Calendar.HOUR_OF_DAY));
+            System.out.println("Минуты: " + calendar.get(Calendar.MINUTE));
+            System.out.println("Секунды: " + calendar.get(Calendar.SECOND));
+
         } catch (ParseException e) {
             try {
                 ourDate=formatter2.parse(date);
-                System.out.println(ourDate);
+                //System.out.println("Для \""+date+"\":");
+                calendar.setTime(ourDate);
+                System.out.println("День: " + calendar.get(Calendar.DATE));
+                System.out.println("День недели: " + ((calendar.get(Calendar.DAY_OF_WEEK) - 1) == 0 ? 7 : calendar.get(Calendar.DAY_OF_WEEK) - 1));
+                System.out.println("День месяца: " + calendar.get(Calendar.DAY_OF_MONTH));
+                System.out.println("День года: " + calendar.get(Calendar.DAY_OF_YEAR));
+                System.out.println("Неделя месяца: " + calendar.get(Calendar.WEEK_OF_MONTH));
+                System.out.println("Неделя года: " + calendar.get(Calendar.WEEK_OF_YEAR));
+                System.out.println("Месяц: " + (calendar.get(Calendar.MONTH)+1));
+                System.out.println("Год: " + calendar.get(Calendar.YEAR));
+
             } catch (ParseException ex) {
                 try {
-                    LocalTime localTime = LocalTime.parse(date, DateTimeFormatter.ofPattern("HH:mm:ss"));
+                    //LocalTime localTime = LocalTime.parse(date, DateTimeFormatter.ofPattern("HH:mm:ss"));
+                    ourDate = formatter3.parse(date);
+                    calendar.setTime(ourDate);
                     String ampm = "";
-                    if(localTime.get(ChronoField.AMPM_OF_DAY)==1){
-                        ampm = "PM";
-                    } else{
-                        ampm="AM";
-                    }
-                    System.out.println("Для \""+localTime+"\":");
-                    System.out.println("AM или PM: "+ampm);
-                    System.out.println("Часы: "+localTime.get(ChronoField.CLOCK_HOUR_OF_AMPM));
-                    System.out.println("Часы дня: "+localTime.getHour());
-                    System.out.println("Минуты: "+localTime.getMinute());
-                    System.out.println("Секунды: "+localTime.getSecond());
+                    System.out.println("AM или PM: " + calendar.getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.ENGLISH));
+                    System.out.println("Часы: " + calendar.get(Calendar.HOUR));
+                    System.out.println("Часы дня: " + calendar.get(Calendar.HOUR_OF_DAY));
+                    System.out.println("Минуты: " + calendar.get(Calendar.MINUTE));
+                    System.out.println("Секунды: " + calendar.get(Calendar.SECOND));
+//                    System.out.println("AM или PM: " + ampm);
+//                    System.out.println("Часы: " + calendar.get(Calendar.HOUR));
+//                    System.out.println("Часы дня: " + calendar.get(Calendar.HOUR_OF_DAY));
+//                    System.out.println("Минуты: " + calendar.get(Calendar.MINUTE));
+//                    System.out.println("Секунды: " + calendar.get(Calendar.SECOND));
+
+
+
+
                 } catch (Exception exc) {
                     exc.printStackTrace();
                 }
