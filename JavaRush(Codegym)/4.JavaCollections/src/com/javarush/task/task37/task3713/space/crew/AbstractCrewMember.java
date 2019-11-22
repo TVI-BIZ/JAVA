@@ -17,23 +17,13 @@ public abstract class AbstractCrewMember {
     }
 
     public void handleRequest(CompetencyLevel competencyLevel, String request) {
-        if (nextCrewMember.competencyLevel.ordinal() <  competencyLevel.ordinal()) {
+        if (this.competencyLevel.ordinal() <  competencyLevel.ordinal()) {
             nextCrewMember.handleRequest(competencyLevel, request);
-        } else  if (nextCrewMember.competencyLevel == CompetencyLevel.EXPERT) {
+        } else  if (this.competencyLevel == competencyLevel) {
             doTheJob(request);
+            return;
         }
 
-//        else if (nextCrewMember != null) {
-//            nextCrewMember.handleRequest(competencyLevel, request);
-//        }
-//        else if (nextCrewMember.competencyLevel.ordinal() >  competencyLevel.ordinal()) {
-//            nextCrewMember.handleRequest(competencyLevel, request);
-//        }
-
-
-//        else if (competencyLevel.ordinal() < nextCrewMember.competencyLevel.ordinal()){
-//            nextCrewMember.handleRequest(competencyLevel, request);
-//        }
     }
 
     protected abstract void doTheJob(String request);

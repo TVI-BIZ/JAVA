@@ -70,20 +70,11 @@ public class Solution {
                     //LocalTime localTime = LocalTime.parse(date, DateTimeFormatter.ofPattern("HH:mm:ss"));
                     ourDate = formatter3.parse(date);
                     calendar.setTime(ourDate);
-                    String ampm = "";
                     System.out.println("AM или PM: " + calendar.getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.ENGLISH));
                     System.out.println("Часы: " + calendar.get(Calendar.HOUR));
                     System.out.println("Часы дня: " + calendar.get(Calendar.HOUR_OF_DAY));
                     System.out.println("Минуты: " + calendar.get(Calendar.MINUTE));
                     System.out.println("Секунды: " + calendar.get(Calendar.SECOND));
-//                    System.out.println("AM или PM: " + ampm);
-//                    System.out.println("Часы: " + calendar.get(Calendar.HOUR));
-//                    System.out.println("Часы дня: " + calendar.get(Calendar.HOUR_OF_DAY));
-//                    System.out.println("Минуты: " + calendar.get(Calendar.MINUTE));
-//                    System.out.println("Секунды: " + calendar.get(Calendar.SECOND));
-
-
-
 
                 } catch (Exception exc) {
                     exc.printStackTrace();
